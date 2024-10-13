@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package bookstore;
+
+option go_package = "github.com/agusgutierrezochoa/musicstore/rpc/bookstore";
+
+import "google/protobuf/timestamp.proto";
+
+service ArtistService {
+    rpc GetArtist(GetArtistRequest) returns (GetArtistResponse);
+}
+
+message GetArtistRequest {
+    oneof SearchCriteria {
+        string name = 1;
+        string artistId = 2;
+    }
+}
+
+message Artist {
+    string artistId = 1;
+    string name = 2;
+    google.protobuf.Timestamp dateOfBirth = 3;
+}
+
+message GetArtistResponse {
+    repeated Artist artists = 1;
+}
